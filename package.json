@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "umi": "^3.2.16",
+    "@umijs/preset-ui": "^2.2.6"
+  }
+}

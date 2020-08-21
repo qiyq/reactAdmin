@@ -1,0 +1,191 @@
+{
+  "id": "1591244",
+  "name": "教育培训安全保障平台",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12606265",
+      "name": "chit",
+      "font_class": "chit",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "12606266",
+      "name": "account",
+      "font_class": "account",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    },
+    {
+      "icon_id": "12606268",
+      "name": "student",
+      "font_class": "student",
+      "unicode": "e6a9",
+      "unicode_decimal": 59049
+    },
+    {
+      "icon_id": "12606269",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    },
+    {
+      "icon_id": "12606270",
+      "name": "class",
+      "font_class": "class",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "12606271",
+      "name": "statistics",
+      "font_class": "statistics",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "12607587",
+      "name": "index",
+      "font_class": "index",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "12654053",
+      "name": "index_ic02",
+      "font_class": "index_ic",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "12654054",
+      "name": "index_ic04",
+      "font_class": "index_ic1",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "12654055",
+      "name": "index_ic05",
+      "font_class": "index_ic2",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "12654056",
+      "name": "index_ic03",
+      "font_class": "index_ic3",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
+      "icon_id": "12654057",
+      "name": "index_ic01",
+      "font_class": "index_ic4",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "12654058",
+      "name": "index_ic06",
+      "font_class": "index_ic5",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "12696210",
+      "name": "advise",
+      "font_class": "advise",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "12696211",
+      "name": "leader",
+      "font_class": "leader",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "12696212",
+      "name": "complain",
+      "font_class": "complain",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "12696213",
+      "name": "patriarch",
+      "font_class": "patriarch",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "12696214",
+      "name": "report",
+      "font_class": "report",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "12696215",
+      "name": "support",
+      "font_class": "support",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "12712604",
+      "name": "teacher",
+      "font_class": "teacher",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "12712605",
+      "name": "review",
+      "font_class": "review",
+      "unicode": "e6bb",
+      "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "12712606",
+      "name": "tree",
+      "font_class": "tree",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "12961277",
+      "name": "hint_02",
+      "font_class": "hint_",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "12961278",
+      "name": "hint-01",
+      "font_class": "hint-",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "12968286",
+      "name": "bank",
+      "font_class": "bank",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "12968323",
+      "name": "fund",
+      "font_class": "fund",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    }
+  ]
+}

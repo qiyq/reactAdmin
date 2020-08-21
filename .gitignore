@@ -1,0 +1,13 @@
+/node_modules/
+*.idea
+/dist/
+*.umi
+/reactAdmin/.idea/
+/reactAdmin/node_modules/
+/reactAdmin/dist/
+/vueAdmin/.idea/
+/vueAdmin/node_modules/
+/vueAdmin/dist/
+/umiTemplate/.idea/
+/umiTemplate/node_modules/
+/umiTemplate/dist/
