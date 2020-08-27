@@ -28,7 +28,7 @@ const Model: LoginModelType = {
   state: {
     status: true,
     from: 6,
-    message: '2',
+    message: '',
   },
 
   effects: {
