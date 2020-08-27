@@ -1,11 +1,10 @@
 import { Alert, Form, Input, Button } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, Dispatch } from 'umi';
 import { StateType } from '@/models/login';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
 import { LockTwoTone, UserOutlined } from '@ant-design/icons';
-import { FormInstance } from 'antd/es/form';
 import classNames from 'classnames';
 import styles from './style.less';
 
@@ -18,7 +17,6 @@ interface LoginProps {
   style?: React.CSSProperties;
   onSubmit?: (values: LoginParamsType) => void;
   className?: string;
-  from?: FormInstance;
 }
 
 const LoginMessage: React.FC<{
@@ -34,27 +32,26 @@ const LoginMessage: React.FC<{
   />
 );
 const Login: React.FC<LoginProps> = (props) => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
+  const { userLogin, submitting } = props;
+  const { status, from, message } = userLogin;
+  console.log(submitting);
   const clsString = classNames(styles.submit);
-  const [type] = useState<string>('account');
   const handleSubmit = (values: LoginParamsType) => {
     const { dispatch } = props;
     dispatch({
       type: 'login/login',
-      payload: { ...values, type },
+      payload: { ...values, from },
     });
-  };
-  const onSubmit = (values: LoginParamsType) => {
-    handleSubmit(values as LoginParamsType);
   };
   return (
     <div className={styles.main}>
       <div className={classNames(styles.login)}>
-        {status === 'error' && loginType === 'account' && !submitting && (
-          <LoginMessage content="账户或密码错误（admin/ant.design）" />
-        )}
-        <Form onFinish={handleSubmit}>
+        {!status && !submitting && <LoginMessage content={message} />}
+        <Form
+          onFinish={(values) => {
+            handleSubmit(values as LoginParamsType);
+          }}
+        >
           <FormItem name="username" rules={[{ required: true, message: '请输入用户昵称!' }]}>
             <Input
               id="userName"

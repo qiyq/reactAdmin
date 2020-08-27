@@ -3,16 +3,17 @@ import request from '@/utils/request';
 export interface LoginParamsType {
   username: string;
   password: string;
-  from:number;
+  from: number;
 }
 
 export async function login(params: LoginParamsType) {
-  return request('/login', {
+  return request('apis/login', {
     method: 'POST',
     data: params,
   });
 }
-
-export async function getFakeCaptcha(mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
+export async function imgPre() {
+  return request('apis/common/image-prefix', {
+    method: 'get',
+  });
 }

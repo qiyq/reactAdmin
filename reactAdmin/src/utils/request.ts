@@ -2,9 +2,8 @@
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import { extend } from 'umi-request';
+import umiRequest, { extend } from 'umi-request';
 import { notification } from 'antd';
-
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -52,5 +51,28 @@ const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
-
+//默认请求头带上token
+request.interceptors.request.use((url, options) => {
+  let token = sessionStorage.getItem('token');
+  if (token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'x-auth-token': token,
+    };
+    return {
+      url: url,
+      options: { ...options, headers: headers },
+    };
+  } else {
+    return {
+      url: url,
+      options: { ...options },
+    };
+  }
+});
+// response拦截器, 处理response
+request.interceptors.response.use((response, options) => {
+  return response;
+});
 export default request;

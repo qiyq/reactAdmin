@@ -7,22 +7,22 @@
  */
 export default {
   dev: {
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
+    '/apis': {
+      target: 'http://182.150.63.48:18086',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
+      pathRewrite: { apis: '/' },
     },
   },
   test: {
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
+    '/': {
+      target: 'http://182.150.63.48:18086',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
   },
   pre: {
-    '/api/': {
-      target: 'your pre url',
+    '/': {
+      target: 'http://182.150.63.48:18086',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

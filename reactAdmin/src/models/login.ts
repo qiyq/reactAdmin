@@ -1,14 +1,13 @@
 import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
 
-import { login } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+import { login, imgPre } from '@/services/login';
 import { getPageQuery } from '@/utils/utils';
 
 export interface StateType {
-  status?: 'ok' | 'error';
-  type?: string;
-  currentAuthority?: 'user' | 'guest' | 'admin';
+  status?: boolean;
+  from?: number;
+  message: string;
 }
 
 export interface LoginModelType {
@@ -27,34 +26,25 @@ const Model: LoginModelType = {
   namespace: 'login',
 
   state: {
-    status: undefined,
+    status: true,
+    from: 6,
+    message: '',
   },
 
   effects: {
     *login({ payload }, { call, put }) {
+      const imgRes = yield call(imgPre);
       const response = yield call(login, payload);
+      console.log(imgRes);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
-        const urlParams = new URL(window.location.href);
-        const params = getPageQuery();
-        let { redirect } = params as { redirect: string };
-        if (redirect) {
-          const redirectUrlParams = new URL(redirect);
-          if (redirectUrlParams.origin === urlParams.origin) {
-            redirect = redirect.substr(urlParams.origin.length);
-            if (redirect.match(/^\/.*#/)) {
-              redirect = redirect.substr(redirect.indexOf('#') + 1);
-            }
-          } else {
-            window.location.href = '/';
-            return;
-          }
-        }
-        history.replace(redirect || '/');
+      if (response.success) {
+        sessionStorage.setItem('token', response.data.xauthToken);
+        sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+        history.replace({ pathname: 'welcome' });
       }
     },
 
@@ -74,11 +64,10 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
       return {
         ...state,
-        status: payload.status,
-        type: payload.type,
+        status: payload.success,
+        message: payload.msg,
       };
     },
   },
