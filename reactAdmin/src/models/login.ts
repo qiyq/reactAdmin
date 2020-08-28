@@ -1,13 +1,15 @@
 import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
-
-import { login, imgPre } from '@/services/login';
+import { message } from 'antd';
+import { login, loginout } from '@/services/login';
+import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 
 export interface StateType {
   status?: boolean;
   from?: number;
   message: string;
+  currentAuthority?: 'admin';
 }
 
 export interface LoginModelType {
@@ -33,9 +35,7 @@ const Model: LoginModelType = {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const imgRes = yield call(imgPre);
       const response = yield call(login, payload);
-      console.log(imgRes);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -44,26 +44,48 @@ const Model: LoginModelType = {
       if (response.success) {
         sessionStorage.setItem('token', response.data.xauthToken);
         sessionStorage.setItem('userInfo', JSON.stringify(response.data));
-        history.replace({ pathname: 'welcome' });
+        const urlParams = new URL(window.location.href);
+        const params = getPageQuery();
+        let { redirect } = params as { redirect: string };
+        if (redirect) {
+          const redirectUrlParams = new URL(redirect);
+          if (redirectUrlParams.origin === urlParams.origin) {
+            redirect = redirect.substr(urlParams.origin.length);
+            if (redirect.match(/^\/.*#/)) {
+              redirect = redirect.substr(redirect.indexOf('#') + 1);
+            }
+          } else {
+            window.location.href = '/';
+            return;
+          }
+        }
+        message.success('登录成功！');
+        history.replace(redirect || '/welcome');
       }
     },
 
-    logout() {
+    *logout({}, { call, put }) {
       const { redirect } = getPageQuery();
       // Note: There may be security issues, please note
-      if (window.location.pathname !== '/user/login' && !redirect) {
-        history.replace({
-          pathname: '/user/login',
-          search: stringify({
-            redirect: window.location.href,
-          }),
-        });
+      if (window.location.pathname !== '/login' && !redirect) {
+        const response = yield call(loginout);
+        if (response.success) {
+          message.success('退出成功！');
+          history.replace({
+            pathname: '/login',
+            search: stringify({
+              redirect: window.location.href,
+            }),
+          });
+          sessionStorage.clear();
+        }
       }
     },
   },
 
   reducers: {
     changeLoginStatus(state, { payload }) {
+      setAuthority('admin');
       return {
         ...state,
         status: payload.success,

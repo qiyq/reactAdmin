@@ -12,8 +12,8 @@ export async function login(params: LoginParamsType) {
     data: params,
   });
 }
-export async function imgPre() {
-  return request('apis/common/image-prefix', {
+export async function loginout() {
+  return request('apis/loginout', {
     method: 'get',
   });
 }

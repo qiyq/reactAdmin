@@ -6,6 +6,7 @@ import { ConnectState } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import logo from '../../assets/logo.svg';
 
 export interface GlobalHeaderRightProps extends Partial<ConnectProps> {
   currentUser?: CurrentUser;
@@ -37,13 +38,15 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    const {
-      currentUser = {
-        avatar: '',
-        name: '',
-      },
-      menu,
-    } = this.props;
+    // const { menu , currentUser = {
+    //   avatar: logo,
+    //   name: '管理员',
+    // }} = this.props;
+    const menu = true;
+    const currentUser = {
+      avatar: logo,
+      name: '管理员',
+    };
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (

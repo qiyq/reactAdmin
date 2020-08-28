@@ -14,7 +14,7 @@ const proSettings: DefaultSettings = {
   fixSiderbar: true,
   colorWeak: false,
   menu: {
-    locale: true,
+    locale: false,
   },
   title: '管理系统',
   pwa: false,

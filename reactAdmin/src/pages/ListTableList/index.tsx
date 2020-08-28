@@ -82,6 +82,7 @@ const TableList: React.FC<{}> = () => {
       title: '规则名称',
       dataIndex: 'name',
       tip: '规则名称是唯一的 key',
+      hideInForm: true,
       rules: [
         {
           required: true,
@@ -92,6 +93,7 @@ const TableList: React.FC<{}> = () => {
     {
       title: '描述',
       dataIndex: 'desc',
+      hideInForm: false,
       valueType: 'textarea',
     },
     {
@@ -99,6 +101,7 @@ const TableList: React.FC<{}> = () => {
       dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
+      hideInSearch: true,
       renderText: (val: string) => `${val} 万`,
     },
     {

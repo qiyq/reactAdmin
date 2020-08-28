@@ -1,20 +1,26 @@
 export default [
   {
+    path: '/',
+    component: '../layouts/LoginLayout',
+  },
+  {
     path: '/login',
     component: '../layouts/LoginLayout',
   },
   {
     path: '/',
     component: '../layouts/SecurityLayout',
+    authority: ['admin'],
     routes: [
       {
         path: '/',
         component: '../layouts/BasicLayout',
-        authority: ['admin', 'user'],
         routes: [
           {
-            path: '/',
-            redirect: '/welcome',
+            path: '/institution',
+            name: '企业列表',
+            icon: 'smile',
+            component: './Institution',
           },
           {
             path: '/welcome',
@@ -27,14 +33,12 @@ export default [
             name: 'admin',
             icon: 'crown',
             component: './Admin',
-            authority: ['admin'],
             routes: [
               {
                 path: '/admin/sub-page',
                 name: 'sub-page',
                 icon: 'smile',
                 component: './Welcome',
-                authority: ['admin'],
               },
             ],
           },
@@ -57,4 +61,4 @@ export default [
   {
     component: './404',
   },
-]
+];

@@ -1,8 +1,8 @@
 import { Subscription, Reducer, Effect } from 'umi';
 
 import { NoticeIconData } from '@/components/NoticeIcon';
-import { queryNotices } from '@/services/user';
 import { ConnectState } from './connect.d';
+import { imgPre } from '../services/common';
 
 export interface NoticeItem extends NoticeIconData {
   id: string;
@@ -21,6 +21,7 @@ export interface GlobalModelType {
   effects: {
     fetchNotices: Effect;
     clearNotices: Effect;
+    imgPre: Effect;
     changeNoticeReadState: Effect;
   };
   reducers: {
@@ -40,23 +41,13 @@ const GlobalModel: GlobalModelType = {
   },
 
   effects: {
-    *fetchNotices(_, { call, put, select }) {
-      const data = yield call(queryNotices);
-      yield put({
-        type: 'saveNotices',
-        payload: data,
-      });
-      const unreadCount: number = yield select(
-        (state: ConnectState) => state.global.notices.filter((item) => !item.read).length,
-      );
-      yield put({
-        type: 'user/changeNotifyCount',
-        payload: {
-          totalCount: data.length,
-          unreadCount,
-        },
-      });
+    *imgPre({}, { call, put }) {
+      const imgRes = yield call(imgPre);
+      if (imgRes.success) {
+        console.log(imgRes);
+      }
     },
+    *fetchNotices(_, { call, put, select }) {},
     *clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
