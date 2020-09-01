@@ -1,27 +1,27 @@
 import { stringify } from 'querystring';
-import { history, Reducer, Effect } from 'umi';
-
+import { Reducer, Effect } from 'umi';
+import { message } from 'antd';
 import { entrById, entrList, EntrListParamsType } from '@/services/insititution';
-import { getPageQuery } from '@/utils/utils';
 
-export interface InstitutionType {
+export interface InstitutionStateType {
   params: EntrListParamsType;
+  list: [];
 }
 
 export interface InstitutionModelType {
   namespace: string;
-  state: InstitutionType;
+  state: InstitutionStateType;
   effects: {
     getList: Effect;
     getInfoById: Effect;
   };
   reducers: {
-    changeLoginStatus: Reducer<InstitutionType>;
+    tableListData: Reducer<InstitutionStateType>;
   };
 }
 
 const Model: InstitutionModelType = {
-  namespace: 'instition',
+  namespace: 'institution',
 
   state: {
     params: {
@@ -31,48 +31,50 @@ const Model: InstitutionModelType = {
       entrName: '',
       pageNo: 1,
       pageSize: 10,
+      totalCount: 0,
       startTime: '',
       state: null,
     },
+    list: [],
   },
 
   effects: {
     *getList({ payload }, { call, put }) {
       const response = yield call(entrList, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      });
-      // Login successfully
       if (response.success) {
-        sessionStorage.setItem('token', response.data.xauthToken);
-        sessionStorage.setItem('userInfo', JSON.stringify(response.data));
-        console.log(history);
-        history.push({ pathname: 'welcome' });
+        yield put({
+          type: 'tableListData',
+          payload: {
+            list: response.data.records,
+            pageNo: response.data.current,
+            totalCount: response.data.total,
+          },
+        });
+      } else {
+        message.success(response.msg);
       }
     },
     *getInfoById({ payload }, { call, put }) {
-      const response = yield call(entrById, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      });
       // Login successfully
-      if (response.success) {
-        sessionStorage.setItem('token', response.data.xauthToken);
-        sessionStorage.setItem('userInfo', JSON.stringify(response.data));
-        console.log(history);
-        history.push({ pathname: 'welcome' });
-      }
+      // if (response.success) {
+      //   sessionStorage.setItem('token', response.data.xauthToken);
+      //   sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+      //   console.log(history);
+      //   history.push({ pathname: 'welcome' });
+      // }
     },
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
+    tableListData(state, { payload }) {
       return {
         ...state,
-        status: payload.success,
-        message: payload.msg,
+        list: payload.list,
+        params: {
+          ...state!.params,
+          pageNo: payload.pageNo,
+          totalCount: payload.totalCount,
+        },
       };
     },
   },

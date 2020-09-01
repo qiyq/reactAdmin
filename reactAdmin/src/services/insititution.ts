@@ -1,13 +1,14 @@
 import request from '@/utils/request';
 
 export interface EntrListParamsType {
-  areaCode: string;
-  startTime: string;
-  endTime: string;
-  entrName: string;
-  entrId: number | string;
+  areaCode?: string;
+  startTime?: string;
+  endTime?: string;
+  entrName?: string;
+  entrId?: number | string;
   pageNo: number;
   pageSize: number;
+  totalCount: number;
   state: number | null;
 }
 

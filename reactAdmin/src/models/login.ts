@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
 import { message } from 'antd';
@@ -64,7 +65,7 @@ const Model: LoginModelType = {
       }
     },
 
-    *logout({}, { call, put }) {
+    *logout({}, { call }) {
       const { redirect } = getPageQuery();
       // Note: There may be security issues, please note
       if (window.location.pathname !== '/login' && !redirect) {

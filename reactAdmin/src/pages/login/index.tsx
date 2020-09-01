@@ -32,11 +32,10 @@ const LoginMessage: React.FC<{
   />
 );
 const Login: React.FC<LoginProps> = (props) => {
-  const { userLogin, submitting } = props;
+  const { dispatch, userLogin, submitting } = props;
   const { status, from, message } = userLogin;
   const clsString = classNames(styles.submit);
   const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props;
     dispatch({
       type: 'login/login',
       payload: { ...values, from },

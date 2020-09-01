@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 import { Subscription, Reducer, Effect } from 'umi';
 
 import { NoticeIconData } from '@/components/NoticeIcon';
@@ -41,13 +42,13 @@ const GlobalModel: GlobalModelType = {
   },
 
   effects: {
-    *imgPre({}, { call, put }) {
+    *imgPre({}, { call }) {
       const imgRes = yield call(imgPre);
       if (imgRes.success) {
         console.log(imgRes);
       }
     },
-    *fetchNotices(_, { call, put, select }) {},
+    *fetchNotices({}, { call, put, select }) {},
     *clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
